@@ -38,8 +38,10 @@ public class TableARepository {
         List<Integer> list = new ArrayList<>();
         result.parallelStream().forEach(record -> {
             int cnt = deleteById(record.getTableAId());
-            if (cnt == 1)
+            if (cnt == 1) {
+                log.debug("successfully deleted id {}", record.getTableAId());
                 list.add(record.getTableAId());
+            }
         });
         log.info("successfully deleted {} records", list.size());
 
