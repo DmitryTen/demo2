@@ -9,11 +9,14 @@ import org.jooq.impl.DefaultDSLContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+import org.springframework.web.client.RestTemplate;
 
 import javax.sql.DataSource;
+import java.util.concurrent.Executor;
 
 @Configuration
-public class DaoConfig {
+public class BasicConfig {
 
     @Bean
     public DefaultDSLContext dslContext(DataSource dataSource) {
@@ -27,6 +30,20 @@ public class DaoConfig {
         return new DefaultDSLContext(jooqConfiguration);
     }
 
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
 
+
+
+    @Bean
+    public Executor callbackExecutor(){
+        ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
+        taskExecutor.setCorePoolSize(10);
+        taskExecutor.setMaxPoolSize(20);
+        taskExecutor.setQueueCapacity(40);
+        return taskExecutor;
+    }
 }
 

@@ -1,7 +1,7 @@
 --liquibase formatted sql
 --changeset DTen:PRESALE-19
 
-insert into vimpelcom.table_c ("name", cdat)
+insert into vimpelcom.table_c (name_c, cdat_c)
 values ('abc1', '2000-12-31'::timestamp),
 ('abc2', '2001-12-31'::timestamp),
 ('abc3', '2002-12-31'::timestamp),
@@ -17,4 +17,6 @@ values ('abc1', '2000-12-31'::timestamp),
 ('abc13', '2012-12-31'::timestamp),
 ('abc14', '2013-12-31'::timestamp),
 ('abc15', '2014-12-31'::timestamp),
-('abc16', '2015-12-31'::timestamp);
+('abc16', '2015-12-31'::timestamp),
+('abc17', '2016-12-31'::timestamp),
+('abc18', '2017-12-31'::timestamp);
