@@ -1,0 +1,13 @@
+
+
+spring:
+  datasource:
+    driver-class-name: @database.driver@
+    url: @database.url@
+    username: @database.user@
+    password: @database.password@
+
+logging:
+  level:
+    org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG
+    org.jooq.tools.LoggerListener: DEBUG
