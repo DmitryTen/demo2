@@ -59,6 +59,7 @@ public class TableBRepository {
                 .columns(TABLE_B.NAME_B, TABLE_B.CDAT_B)
                 .values(name, LocalDateTime.now())
                 .returningResult(TABLE_B.TABLE_B_ID).fetchOne();
+        log.info("created record {}, name {}", record.value1(), name);
 
         return record.value1();
     }

@@ -51,11 +51,39 @@
     
 Пример тестовых запросов на создание записей:
 
-    curl -XPOST http://localhost:8080/api/table_a -H 'Content-Type: application/json' -d '{"name"="test"}'
+    curl -XPOST http://localhost:8080/api/table_a -H 'Content-Type: application/json' -d 'test'
     {"response_date_time":"2021-04-26T20:41:13.080084","created_id":4261045}
     
-    curl -XPOST http://localhost:8080/api/table_b -H 'Content-Type: application/json' -d '{"name"="test"}'
+    curl -XPOST http://localhost:8080/api/table_b -H 'Content-Type: application/json' -d 'test'
     {"response_date_time":"2021-04-26T20:41:13.080084","created_id":4261045}
     
-    curl -XPOST http://localhost:8080/api/table_c -H 'Content-Type: application/json' -d '{"name"="test"}'
+    curl -XPOST http://localhost:8080/api/table_c -H 'Content-Type: application/json' -d 'test'
     {"response_date_time":"2021-04-26T20:41:13.080084","created_id":4261045}
+    
+
+Об АПИ логгинге:    
+    
+    Необходимо обеспечить логирование работы API.
+
+Насколько я понял, необходимо обеспечить логгирование http request/response.
+Для этой цели используется кастомный фильтр, т.к. стандартные решения не позволяют логгировать payload.
+
+    demo.project.vimpelcom.filters.CustomLoggingFilter
+    
+Его конфигурирование происходит с помощью FilterChainProxy в 
+
+    demo.project.vimpelcom.configuration.LoggingConfig
+    
+Пример лога:
+
+    2021-04-27 10:23:56.755 INFO [qtp1730813026-24] (CustomLoggingFilter.java:79) - URI /api/table_a/old_records/async/2005-01-01T23:59:59, query: callbackUrl=http%3A%2F%2Flocalhost%3A8080%2Fmock%2FcallbackMock, method DELETE, content-length: -1, payload ''
+    ... controller logs ...
+    2021-04-27 10:23:56.757 INFO [qtp1730813026-24] (CustomLoggingFilter.java:90) - resp content-length: 50, payload: '{"response_date_time":"2021-04-27T10:23:56.75658"}'
+    
+    OR
+    
+    2021-04-27 10:27:51.449 INFO [qtp1730813026-27] (CustomLoggingFilter.java:79) - URI /api/table_a, query: null, method POST, content-length: 4, payload 'test'
+    ... controller logs ...
+    2021-04-27 10:27:51.453 INFO [qtp1730813026-27] (CustomLoggingFilter.java:90) - resp content-length: 73, payload: '{"response_date_time":"2021-04-27T10:27:51.452476","created_id":13698238}'    
+
+CustomLoggingFilter позволяет конфигурировать логи в широких пределах.

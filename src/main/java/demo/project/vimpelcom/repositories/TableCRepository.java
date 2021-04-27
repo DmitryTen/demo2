@@ -61,6 +61,7 @@ public class TableCRepository {
                 .columns(TABLE_C.NAME_C, TABLE_C.CDAT_C)
                 .values(name, LocalDateTime.now())
                 .returningResult(TABLE_C.TABLE_C_ID).fetchOne();
+        log.info("created record {}, name {}", record.value1(), name);
 
         return record.value1();
     }

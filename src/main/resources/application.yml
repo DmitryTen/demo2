@@ -1,6 +1,7 @@
 
-
 spring:
+  profiles:
+    active: @spring.profiles.active@
   datasource:
     driver-class-name: @database.driver@
     url: @database.url@
@@ -10,5 +11,4 @@ spring:
 logging:
   level:
     org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG
-    org.springframework.security.web.FilterChainProxy: DEBUG
     org.jooq.tools.LoggerListener: INFO
