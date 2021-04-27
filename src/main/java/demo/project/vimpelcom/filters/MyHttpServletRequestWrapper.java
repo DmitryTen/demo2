@@ -1,6 +1,8 @@
 package demo.project.vimpelcom.filters;
 
 import org.apache.commons.io.IOUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
 
 import javax.servlet.ReadListener;
@@ -13,6 +15,8 @@ import java.io.InputStream;
 
 public class MyHttpServletRequestWrapper extends HttpServletRequestWrapper {
 
+    private static final Logger log = LoggerFactory.getLogger( MyHttpServletRequestWrapper.class );
+
     private byte[] body;
 
     public MyHttpServletRequestWrapper(HttpServletRequest request) {
@@ -20,6 +24,7 @@ public class MyHttpServletRequestWrapper extends HttpServletRequestWrapper {
         try {
             body = IOUtils.toByteArray(request.getInputStream());
         } catch (IOException ex) {
+            log.info("Exception", ex);
             body = new byte[0];
         }
     }
