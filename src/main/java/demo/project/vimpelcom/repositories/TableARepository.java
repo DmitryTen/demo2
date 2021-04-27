@@ -60,6 +60,7 @@ public class TableARepository {
                 .columns(TABLE_A.NAME_A, TABLE_A.CDAT_A)
                 .values(name, LocalDateTime.now())
                 .returningResult(TABLE_A.TABLE_A_ID).fetchOne();
+        log.info("created record {}, name {}", record.value1(), name);
 
         return record.value1();
     }
