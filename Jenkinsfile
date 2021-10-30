@@ -6,10 +6,10 @@ pipeline {
     tools {
         maven 'Maven 3.8.3'
     }
-    parameters {
-    }
-    environment {
-    }
+//    parameters {
+//    }
+//    environment {
+//    }
     stages {
         stage('init'){
             steps {
