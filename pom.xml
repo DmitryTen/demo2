@@ -18,8 +18,8 @@
         <database.url>jdbc:postgresql://localhost:5432/demo</database.url>
         <database.driver>org.postgresql.Driver</database.driver>
         <database.schema>vimpelcom</database.schema>
-        <database.user>postgres</database.user>
-        <database.password>postgres</database.password>
+        <database.user>vimpelcom_demo</database.user>
+        <database.password>vimpelcom_demo</database.password>
         <liquibase.version>3.6.3</liquibase.version>
         <changelog.file>db/changelog.xml</changelog.file>
     </properties>
