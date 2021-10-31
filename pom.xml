@@ -11,6 +11,7 @@
     <groupId>demo.project</groupId>
     <artifactId>vimpelcom</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
     <name>demo</name>
     <description>Demo java project for Vimpelcom</description>
     <properties>
@@ -167,5 +168,12 @@
             </properties>
         </profile>
     </profiles>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>home-nexus-snapshots</id>
+            <url>http://192.168.31.141:8082/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
 
 </project>
