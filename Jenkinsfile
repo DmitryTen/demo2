@@ -32,10 +32,17 @@ pipeline {
                 }
             }
         }
-        stage('deploy') {
+        stage('deploy-maven') {
             steps {
                 script {
-                    gv.deployApp()
+                    gv.deployMvn()
+                }
+            }
+        }
+        stage('deploy-docker') {
+            steps {
+                script {
+                    gv.deployDocker()
                 }
             }
         }
