@@ -1,3 +1,10 @@
+#!/usr/bin/env groovy
+
+library identifier: 'jenkins-shared-libraries@master', retriever(
+        [$class: 'GitSCMSource',
+        remote: 'https://github.com/DmitryTen/jenkins-shared-libraries.git',
+        credentials: 'github-creds']
+)
 def gv
 
 pipeline {
@@ -21,7 +28,7 @@ pipeline {
         stage('build') {
             steps {
                 script {
-                    gv.buildApp()
+                    mvnPackage('jdbc:postgresql://192.168.31.141:5432/demo', 'vimpelcom_demo-db')
                 }
             }
         }
@@ -35,14 +42,16 @@ pipeline {
         stage('deploy-maven') {
             steps {
                 script {
-                    gv.deployMvn()
+                    mvnDeploy('home-nexus-snapshots', 'nexus-user')
                 }
             }
         }
         stage('deploy-docker') {
             steps {
                 script {
-                    gv.deployDocker()
+                    dockerBuild('192.168.31.141:8083/vimpelcom-demo:1.1')
+                    dockerLogin('192.168.31.141:8083', 'nexus-user')
+                    dockerPush('192.168.31.141:8083/vimpelcom-demo:1.1')
                 }
             }
         }
